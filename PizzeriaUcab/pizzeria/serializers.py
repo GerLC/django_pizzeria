@@ -20,7 +20,7 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
 class TamanoPizzaSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.TamanoPizza
-        fields = ['url', 'nombre_tamano', 'monto_tamano']
+        fields = "__all__"
 
 
 class ToppinSerializer(serializers.ModelSerializer):
@@ -39,25 +39,41 @@ class PedidoSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Pedido
         fields = "__all__"
-        depht = 1
+
+
+class PizzaPostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Pizza
+        fields = "__all__"
 
 
 class PizzaSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Pizza
         fields = "__all__"
-        depht = 1
+        depth = 1
 
 
 class PizzaToppinSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.PizzaToppin
         fields = "__all__"
-        depht = 1
+        depth = 2
+
+
+class PizzaToppinPostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.PizzaToppin
+        fields = "__all__"
 
 
 class BebidaPedidoSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.BebidaPedido
         fields = "__all__"
-        depht = 1
+        depth = 1
+    
+class BebidaPedidoPostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.BebidaPedido
+        fields = "__all__"

@@ -1,0 +1,23 @@
+<p>orden works!</p>
+
+<div class= "container">
+    <div class= "row">
+        <div *ngIf="pedidos">
+            Pedido N: {{pedidos.id}}
+            <div *ngFor="let pizza of pizza">
+                <div *ngIf="pizza.id_pedido.id === pedidos.id">
+                    <mat-divider></mat-divider>
+                    Pizza: {{pizza.id_tamano.nombre_tamano}} - {{pizza.id_tamano.monto_tamano}}
+                    <p>Toppins = </p>
+                    <div *ngFor="let toppin of toppinSelected">
+                        <div *ngIf="toppin.id_pizza.id === pizza.id">
+                            {{toppin.id_toppin.nombre_toppin}} - {{toppin.id_toppin.monto_toppin}}
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            Total a pagar: {{pedidos.total_pedido}}
+        </div>
+    </div>
+</div>

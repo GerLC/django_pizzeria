@@ -29,23 +29,17 @@ class Bebida(models.Model):
 
 
 class Pedido(models.Model):
-    estatus_pedido = models.CharField(max_length=50, unique=True)
+    estatus_pedido = models.CharField(max_length=50)
     fecha_pedido =  models.DateTimeField('date')
     total_pedido = models.DecimalField(max_digits=18, decimal_places=2)
-    metodo_pedido = models.CharField(max_length=50, unique=True)
-    usuario = models.CharField(max_length=50, unique=True)
-    direccion_pedido = models.CharField(max_length=50, unique=True)
-
-    def __str__(self):
-        return self.usuario, self.fecha_pedido, self.total_pedido
+    metodo_pedido = models.CharField(max_length=50)
+    usuario = models.CharField(max_length=50)
+    direccion_pedido = models.CharField(max_length=50)
 
 
 class Pizza(models.Model):
     id_pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE)
     id_tamano = models.ForeignKey(TamanoPizza, on_delete=models.DO_NOTHING)
-
-    def __str__(self):
-        return self.nombre_tamano
 
 
 class PizzaToppin(models.Model):

@@ -1,0 +1,34 @@
+<ngb-carousel>
+    <ng-template *ngFor='let images of images' ngbSlide>
+        <div class="img-wrapper">
+        <img src="{{images}}" alt="Random first slide" class="w-100" style="width: 100%; height: 70vh">
+        </div>
+        <div class="carousel-caption">
+        </div>
+    </ng-template>
+</ngb-carousel>
+<div class="container">
+    <div class="row">
+        <button type="button" class="btn btn-primary btn-lg btn-block">Block level button</button>
+    </div>
+    <div class="row">
+        <form [formGroup]="pedidoFormControl" (ngSubmit)="add()">
+            <div class="form-group">
+                <label for="exampleInputEmail1">User</label>
+                <input type="email" formControlName="usuario" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Metodo</label>
+                <input type="email" formControlName="metodo" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Direccion </label>
+                <input type="email" formControlName="direccion" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>

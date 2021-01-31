@@ -1,0 +1,87 @@
+<div class="container">
+    <div class="row">
+      <div class="col-7">
+          <mat-spinner class="center" *ngIf="isWait == true" ></mat-spinner>
+          <mat-vertical-stepper [linear]="isLinear" #stepper>
+            <mat-step [stepControl]="pizzaFormControl">
+              <form [formGroup]="pizzaFormControl">
+                <ng-template matStepLabel>Elija el tamaño</ng-template>
+                  <mat-button-toggle-group #group="matButtonToggleGroup" formControlName="id_tamano" *ngFor='let tamano of tamanoPizza'>
+                    <mat-button-toggle matStepperNext [value]=tamano>{{tamano.nombre_tamano}} - ${{tamano.monto_tamano}}</mat-button-toggle>
+                  </mat-button-toggle-group>
+                <div>
+                  <button mat-button matStepperNext>Next</button>
+                </div>
+              </form>
+            </mat-step>
+            <mat-step [stepControl]="toppinFormControl" [optional]="true">
+              <form [formGroup]="toppinFormControl">
+                <ng-template matStepLabel>TOPPINS</ng-template>
+                <button  mat-icon-button color="primary" aria-label="Agregue tipos" (click)="addToppin()">
+                    <mat-icon>add_shopping_cart</mat-icon>
+                  </button>
+
+                  <div formArrayName="toppin">
+                    <div *ngFor="let t of toppinFormControl.get('toppin').controls; let i=index">
+                      <div [formGroupName]="i" style="display: flex; flex-flow: row; justify-content: center; align-items: center;">
+                        <mat-form-field appearance="standard" style="margin: 3%;">
+                          <mat-label>Toppins</mat-label>
+                          <mat-select formControlName="id_toppin">
+                          <mat-option
+                              *ngFor="let tipo of toppins"
+                              [value]="tipo">
+                              {{ tipo.nombre_toppin }}  - ${{ tipo.monto_toppin}}
+                          </mat-option>
+                          </mat-select>
+                          <mat-icon matSuffix>local_pizza</mat-icon>
+                         </mat-form-field>
+                         <button  mat-icon-button color="primary" aria-label="Agregue tipos" (click)="deleteToppin(i)">
+                            <mat-icon>remove_circle_outline</mat-icon>
+                          </button>
+                      </div>
+                    </div>
+                  </div>              
+                <div>
+                  <button mat-button matStepperPrevious>Back</button>
+                  <button mat-button matStepperNext>Next</button>
+                </div>
+              </form>
+            </mat-step>
+            <mat-step>
+              <ng-template matStepLabel>Done</ng-template>
+                <button mat-raised-button (click) = 'addPizza()'> Pedir </button>
+
+                <div *ngIf="pizza">
+                    {{pizza.id_tamano.nombre_tamano}}  -  {{pizza.id_tamano.monto_tamano}} - {{pizza.id}}
+                      <div *ngFor= "let toppin of toppinSelected">
+                        <div *ngIf="toppin.id_pizza.id === pizza.id">
+                          {{toppin.id_toppin.nombre_toppin}}  -  {{toppin.id_toppin.monto_toppin}}
+                        </div>
+                      </div>
+                </div>
+                Monto Pizza : ${{monto}}
+             <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button (click)="stepper.reset()">Solicitar Otra Pizza</button>
+                <button mat-button (click)="nav()"> Confirmar </button>
+
+              </div>
+            </mat-step>
+          </mat-vertical-stepper>  
+        </div>        
+  
+  
+      <div class="col-3">
+         <div *ngIf= "pedidos">
+            Datos:
+
+            Codigo: {{pedidos.id}}
+            Usuario: {{pedidos.usuario}}
+            Total Actual: {{pedidos.total_pedido}}
+         </div>
+         <app-orden [pedido]="pedido.pedido"></app-orden>
+      </div>
+    </div>
+
+</div>
+
