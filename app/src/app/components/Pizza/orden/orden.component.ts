@@ -15,6 +15,7 @@ export class OrdenComponent implements OnInit {
 
   pizza: any[] = [];
   toppinSelected: any[] = [];
+  bebidas: any[] = [];
   pedidos: any;
 
   constructor(
@@ -27,6 +28,7 @@ export class OrdenComponent implements OnInit {
     console.log(this.pedido)
     this.getOrderId();
     this.getPizzas();
+    this.getBebidas();
     this.getToppinPizza();
 
   }
@@ -49,6 +51,11 @@ export class OrdenComponent implements OnInit {
     })
   }
 
+  getBebidas() {
+    this.pizzaService.getBebidaPedido().subscribe((data)=> {
+      this.bebidas = data;
+    })
+  }
 
   getOrderId(): void {
     this.pizzaService.getOrdenById(this.pedido).subscribe((data) =>

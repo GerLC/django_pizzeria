@@ -173,6 +173,14 @@ export class PizzaPedidoComponent implements OnInit {
     })
   }
 
+  createBebi(bebida:any) {
+    this.isWait = true;
+    this.pizzaService.addBebida(bebida).subscribe((response) => {
+      this.isWait = false;
+      this.updateMonto(this.pedidos,this.monto);
+
+    })
+  }
 
   // ADD Forms
 
@@ -235,10 +243,6 @@ export class PizzaPedidoComponent implements OnInit {
 add(id: number): void {
   let newToppin: any;
   let idToppin: any; 
-  if (this.toppin.length === 0) { 
-    console.log("Array is empty!");
-    this.updateMonto(this.pedidos,this.monto);
-  }
 
   for(let i = 0; i < this.toppin.length; i++) {
 
@@ -251,6 +255,8 @@ add(id: number): void {
 
     if (this.toppin.length === 0) {
        console.log("Array is empty!")
+       this.updateMonto(this.pedidos,this.monto);
+
        } else {
         this.createToppin(newPizza)
        }
@@ -267,7 +273,7 @@ add(id: number): void {
   // Bebidas
 
     get bebida() : FormArray {
-      return this.toppinFormControl.get("bebida") as FormArray
+      return this.bebidaFormControl.get("bebida") as FormArray
     }
   
     formBebida(){
@@ -287,4 +293,31 @@ add(id: number): void {
       this.bebida.removeAt(index);
   }
 
+  createBebida(): void {
+    let newToppin: any;
+    let idBebida: any; 
+
+    for(let i = 0; i < this.bebida.length; i++) {
+  
+      idBebida = this.bebida.at(i).value;
+  
+      const newBebida: any = {
+        id_pedido: this.pedido.pedido,
+        id_bebida: idBebida.id_bebida.id
+      };
+  
+      if (this.bebida.length === 0) {
+         console.log("Array is empty!")
+         } else {
+          this.createBebi(newBebida);
+        }
+        
+        newToppin = idBebida.id_bebida.monto_bebida;
+        this.monto += parseFloat(newToppin);
+  
+      } 
+      console.log('Monto Final', this.monto);
+  
+    }
+  
 }

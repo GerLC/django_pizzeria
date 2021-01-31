@@ -63,20 +63,59 @@
              <div>
                 <button mat-button matStepperPrevious>Back</button>
                 <button mat-button (click)="stepper.reset()">Solicitar Otra Pizza</button>
+                <button mat-button matStepperNext>Next</button>
                 <button mat-button (click)="nav()"> Confirmar </button>
 
               </div>
             </mat-step>
+            <mat-step [stepControl]="bebidaFormControl" [optional]="true">
+              <form [formGroup]="bebidaFormControl">
+                <ng-template matStepLabel>Bebidas</ng-template>
+                <button  mat-icon-button color="primary" aria-label="Agregue bebidas" (click)="addBebida()">
+                    <mat-icon>add_shopping_cart</mat-icon>
+                  </button>
+
+                  <div formArrayName="bebida">
+                    <div *ngFor="let t of bebidaFormControl.get('bebida').controls; let i=index">
+                      <div [formGroupName]="i" style="display: flex; flex-flow: row; justify-content: center; align-items: center;">
+                        <mat-form-field appearance="standard" style="margin: 3%;">
+                          <mat-label>Bebidas</mat-label>
+                          <mat-select formControlName="id_bebida">
+                          <mat-option
+                              *ngFor="let tipo of bebidas"
+                              [value]="tipo">
+                              {{ tipo.nombre_bebida }}  - ${{ tipo.monto_bebida}}
+                          </mat-option>
+                          </mat-select>
+                          <mat-icon matSuffix>local_pizza</mat-icon>
+                         </mat-form-field>
+                         <button  mat-icon-button color="primary" aria-label="remover bebidas" (click)="deleteBebida(i)">
+                            <mat-icon>remove_circle_outline</mat-icon>
+                          </button>
+                      </div>
+                    </div>
+                  </div>              
+                <div>
+                  <button mat-button matStepperPrevious>Back</button>
+                  <button mat-raised-button (click) = 'createBebida()' matStepperPrevious> Pedir </button>
+                </div>
+              </form>
+            </mat-step>
           </mat-vertical-stepper>  
+
+
         </div>        
   
   
-      <div class="col-3">
+      <div class="col-3" style="border: 1px solid #000; border-radius: 5%;">
          <div *ngIf= "pedidos">
             Datos:
 
             Codigo: {{pedidos.id}}
             Usuario: {{pedidos.usuario}}
+            <p>Metodo Pedido: {{pedidos.metodo_pedido}} </p>
+            <p>Direccion: {{pedidos.direccion_pedido}} </p>
+
             Total Actual: {{pedidos.total_pedido}}
          </div>
          <app-orden [pedido]="pedido.pedido"></app-orden>
