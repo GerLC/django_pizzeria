@@ -4,31 +4,46 @@
         <img src="{{images}}" alt="Random first slide" class="w-100" style="width: 100%; height: 70vh">
         </div>
         <div class="carousel-caption">
+            <h3 style="font-size: 3em; color: #fff;"> Cree su propia Pizza hoy! </h3>
         </div>
     </ng-template>
 </ngb-carousel>
-<div class="container">
+
+<div class="container" style="height: 110vh;">
     <div class="row">
-        <button type="button" class="btn btn-primary btn-lg btn-block">Block level button</button>
+        <button type="button" (click)="scroll(target)" class="btn-mi btn-lg btn-block">
+            <mat-icon style="font-size: 2em; width: 10rem;">keyboard_arrow_down
+            </mat-icon>
+        </button>
     </div>
-    <div class="row" style="margin-top: 5%;">
-        <form [formGroup]="pedidoFormControl" (ngSubmit)="add()">
-            <div class="form-group">
-                <label for="exampleInputEmail1">User</label>
-                <input type="email" formControlName="usuario" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    <h3> Realice su pedido aqui! </h3>
+    <div #target class="row" style="margin-top: 5%; border: 1px solid; padding: 4%; border-radius: 1%;">
+        <div class="col-6">
+            <form [formGroup]="pedidoFormControl" (ngSubmit)="add()">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">User</label>
+                    <input type="text" id="fname" name="fname" formControlName="usuario" class="form-control">
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Metodo</label>
+                    <input type="email" formControlName="metodo" class="form-control" id="metodo" aria-describedby="emailHelp">
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Direccion </label>
+                    <input type="email" [disabled]="!isLocal" formControlName="direccion" class="form-control" id="direccion" aria-describedby="emailHelp">
+                    <small id="emailHelp" class="form-text text-muted">Nunca compartiremos tu direccion con nadie</small>
+                  </div>
+                  <button type="submit" class="btn btn-success btn-lg btn-block"> Pida Pizza </button>
+            </form>
+        </div>
+        <mat-divider [vertical]=true></mat-divider>
+        <div class="col-5">
+            <div class="btn-group">
+                <button value='Local' style="background-image: url(https://picsum.photos/id/1047/450/180); background-repeat: no-repeat;" (click)="changeName('Local')"><mat-icon style="font-size: 3em;">local_pizza</mat-icon></button>
+                <button value='Delivery' style="background-image: url(https://picsum.photos/id/0/450/180); background-repeat: no-repeat;" (click)="changeName('Delivery')"><mat-icon style="font-size: 3em;">house</mat-icon></button>
               </div>
-              <div class="form-group">
-                <label for="exampleInputEmail1">Metodo</label>
-                <input type="email" formControlName="metodo" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-              </div>
-              <div class="form-group">
-                <label for="exampleInputEmail1">Direccion </label>
-                <input type="email" formControlName="direccion" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-              </div>
-              <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+
+
+        </div>
     </div>
 </div>

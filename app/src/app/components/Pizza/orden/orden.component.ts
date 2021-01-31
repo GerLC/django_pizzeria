@@ -45,7 +45,7 @@ export class OrdenComponent implements OnInit {
   getToppinPizza(): void {
     this.pizzaService.getToppinPizza().subscribe((data) =>
     {
-      this.toppinSelected = data;
+      this.toppinSelected = data ;
 
       console.log('Factura Toppin', this.toppinSelected)
     })

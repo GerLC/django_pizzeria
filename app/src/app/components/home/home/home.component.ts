@@ -12,6 +12,7 @@ import { PizzaService } from 'src/app/services/pizza.service';
 })
 export class HomeComponent implements OnInit {
 
+
   // Variables
   pedidoFormControl: any;
   // Estado
@@ -19,6 +20,8 @@ export class HomeComponent implements OnInit {
   // Img
   images= [`/assets/images/pizza.jpg`, `/assets/images/pizza2.jpg`, `/assets/images/pizza3.jpg`]
 
+  direccion: string = '123 Av. Pizzeria La UCAB'
+  isLocal = true;
 
   constructor(
     private fb: FormBuilder,
@@ -87,6 +90,26 @@ pedidoPizza(idPedido: number){
   this.router.navigate(['/pizza'], { queryParams: {
     pedido: idPedido
   }});
+}
+
+
+// INPUT
+
+changeName(input: any) {
+  (document.getElementById("metodo") as HTMLTextAreaElement).value = input;
+  if (input == 'Local') {
+    this.isLocal = true;
+    (document.getElementById("direccion") as HTMLTextAreaElement).value = this.direccion;
+  } else {
+    this.isLocal = false;
+
+    (document.getElementById("direccion") as HTMLTextAreaElement).value = ''
+  }
+}  
+
+  // Scrolling
+  scroll(element: any) {
+    element.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"})
 }
 
 

@@ -7,7 +7,7 @@
               <form [formGroup]="pizzaFormControl">
                 <ng-template matStepLabel>Elija el tamaño</ng-template>
                   <mat-button-toggle-group #group="matButtonToggleGroup" formControlName="id_tamano" *ngFor='let tamano of tamanoPizza'>
-                    <mat-button-toggle matStepperNext [value]=tamano>{{tamano.nombre_tamano}} - ${{tamano.monto_tamano}}</mat-button-toggle>
+                    <mat-button-toggle [value]=tamano >{{tamano.nombre_tamano}} - ${{tamano.monto_tamano}}</mat-button-toggle>
                   </mat-button-toggle-group>
                 <div>
                   <button mat-button matStepperNext>Next</button>
@@ -17,7 +17,7 @@
             <mat-step [stepControl]="toppinFormControl" [optional]="true">
               <form [formGroup]="toppinFormControl">
                 <ng-template matStepLabel>TOPPINS</ng-template>
-                <button  mat-icon-button color="primary" aria-label="Agregue tipos" (click)="addToppin()">
+                <button  matTooltip="Agregue Toppin" mat-icon-button color="primary" aria-label="Agregue Toppins" (click)="addToppin()">
                     <mat-icon>add_shopping_cart</mat-icon>
                   </button>
 
@@ -35,7 +35,7 @@
                           </mat-select>
                           <mat-icon matSuffix>local_pizza</mat-icon>
                          </mat-form-field>
-                         <button  mat-icon-button color="primary" aria-label="Agregue tipos" (click)="deleteToppin(i)">
+                         <button  matTooltip="Remover Toppin" mat-icon-button color="primary" aria-label="Agregue tipos" (click)="deleteToppin(i)">
                             <mat-icon>remove_circle_outline</mat-icon>
                           </button>
                       </div>
@@ -49,29 +49,33 @@
             </mat-step>
             <mat-step>
               <ng-template matStepLabel>Done</ng-template>
-                <button mat-raised-button (click) = 'addPizza()'> Pedir </button>
+                <button matTooltip="Solicite la Pizza" mat-raised-button (click) = 'addPizza()'> Pedir </button>
 
                 <div *ngIf="pizza">
-                    {{pizza.id_tamano.nombre_tamano}}  -  {{pizza.id_tamano.monto_tamano}} - {{pizza.id}}
+                  <mat-card style="margin-top: 2% ;"> 
+                    Pizza N {{pizza.id}}: {{pizza.id_tamano.nombre_tamano}}  -  ${{pizza.id_tamano.monto_tamano}} 
+                    <mat-card> 
                       <div *ngFor= "let toppin of toppinSelected">
                         <div *ngIf="toppin.id_pizza.id === pizza.id">
-                          {{toppin.id_toppin.nombre_toppin}}  -  {{toppin.id_toppin.monto_toppin}}
+                          {{toppin.id_toppin.nombre_toppin}}  -  ${{toppin.id_toppin.monto_toppin}}
                         </div>
                       </div>
+                    </mat-card>
+                    Monto Pizza : ${{monto}}
+                  </mat-card>
                 </div>
-                Monto Pizza : ${{monto}}
              <div>
                 <button mat-button matStepperPrevious>Back</button>
                 <button mat-button (click)="stepper.reset()">Solicitar Otra Pizza</button>
                 <button mat-button matStepperNext>Next</button>
-                <button mat-button (click)="nav()"> Confirmar </button>
+                <button mat-button (click)="nav()"> Generar Factura </button>
 
               </div>
             </mat-step>
             <mat-step [stepControl]="bebidaFormControl" [optional]="true">
               <form [formGroup]="bebidaFormControl">
                 <ng-template matStepLabel>Bebidas</ng-template>
-                <button  mat-icon-button color="primary" aria-label="Agregue bebidas" (click)="addBebida()">
+                <button matTooltip="Agregar Bebidas" mat-icon-button color="primary" aria-label="Agregue bebidas" (click)="addBebida()">
                     <mat-icon>add_shopping_cart</mat-icon>
                   </button>
 
@@ -97,7 +101,7 @@
                   </div>              
                 <div>
                   <button mat-button matStepperPrevious>Back</button>
-                  <button mat-raised-button (click) = 'createBebida()' matStepperPrevious> Pedir </button>
+                  <button mat-raised-button (click) ='createBebida()' matStepperPrevious> Pedir </button>
                 </div>
               </form>
             </mat-step>
@@ -109,10 +113,11 @@
   
       <div class="col-3" style="border: 1px solid #000; border-radius: 5%;">
          <div *ngIf= "pedidos">
-            Datos:
-
+            <h4><strong>Factura Datos:</strong></h4>
+            <hr>
             Codigo: {{pedidos.id}}
             Usuario: {{pedidos.usuario}}
+            <p>Estatus: {{pedidos.estatus}} </p>
             <p>Metodo Pedido: {{pedidos.metodo_pedido}} </p>
             <p>Direccion: {{pedidos.direccion_pedido}} </p>
 

@@ -3,6 +3,7 @@ import { FormArray, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { ActivatedRoute , Route, Router } from '@angular/router';
 import { PizzaService } from 'src/app/services/pizza.service';
 import {Location} from '@angular/common';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-pizza-pedido',
@@ -44,9 +45,16 @@ export class PizzaPedidoComponent implements OnInit {
     private location: Location,
     private fb: FormBuilder,
     private pizzaService: PizzaService,
+    private _snackBar: MatSnackBar
   ) { }
 
 
+  // SnackBar
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 2000,
+    });
+  }
 
   nav(){
     this.router.navigateByUrl('/', { skipLocationChange : true}).then( ( ) => {
@@ -78,7 +86,7 @@ export class PizzaPedidoComponent implements OnInit {
   updateMonto(pedido: any, monto: any): void {
 
     const pedidoN: any = {
-      estatus_pedido: pedido.estatus_pedido,
+      estatus_pedido: 'Pedido',
       fecha_pedido: pedido.fecha_pedido,
       total_pedido: parseFloat(pedido.total_pedido) + parseFloat(monto),
       metodo_pedido: pedido.metodo_pedido,
@@ -178,6 +186,7 @@ export class PizzaPedidoComponent implements OnInit {
     this.pizzaService.addBebida(bebida).subscribe((response) => {
       this.isWait = false;
       this.updateMonto(this.pedidos,this.monto);
+      this.openSnackBar('Bebidas Guardadas ', 'Bebidas!');
 
     })
   }
@@ -194,6 +203,8 @@ export class PizzaPedidoComponent implements OnInit {
     id_tamano: this.pizzaFormControl.get("id_tamano").value.id,
   };
   console.log(newPizza);
+
+  this.openSnackBar('Pizza ' + this.pizzaFormControl.get("id_tamano").value.nombre_tamano, 'Ok!');
 
   this.createPizza(newPizza);
 
@@ -244,6 +255,12 @@ add(id: number): void {
   let newToppin: any;
   let idToppin: any; 
 
+  
+  if (this.toppin.length === 0) {
+    console.log("Array is empty!")
+    this.updateMonto(this.pedidos,this.monto);
+  }
+
   for(let i = 0; i < this.toppin.length; i++) {
 
     idToppin = this.toppin.at(i).value;
@@ -255,7 +272,6 @@ add(id: number): void {
 
     if (this.toppin.length === 0) {
        console.log("Array is empty!")
-       this.updateMonto(this.pedidos,this.monto);
 
        } else {
         this.createToppin(newPizza)

@@ -1,3 +1,9 @@
+
+@keyframes action {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-10px); }
+}
+
 /* Elimina el border de los botones */
 :focus {
   outline:none;
@@ -26,4 +32,61 @@
   opacity: 1;
   visibility: visible;
   z-index: 10;
+}
+
+// Button
+
+.btn-group {
+  display: flex;
+  flex-flow: column; 
+  overflow: hidden; 
+}
+
+.btn-group button {
+  border: 1px solid; 
+  color: white; 
+  padding: 10px 24px; 
+  cursor: pointer; 
+  width: 27rem; 
+  height: 10rem;
+  background-color: rgba(78, 73, 73, 0.8);
+  filter: grayscale(0);
+  transition: transform .5s, filter 1.5s ease-in-out;
+  overflow: hidden; 
+}
+
+.btn-group button img {
+  background-color: rgba(78, 73, 73, 0.8);
+  filter: grayscale(0);
+  transition: transform .5s, filter 1.5s ease-in-out;
+  overflow: hidden; 
+}
+
+
+.btn-group button:hover img {
+  -moz-transform: scale(1.1);
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+  filter:brightness(1);
+}
+
+.btn-group button:not(:last-child) {
+  border-bottom: none; 
+}
+
+.btn-group button:hover {
+  -moz-transform: scale(1.1);
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+  filter:brightness(1);
+}
+
+.btn-mi {
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+  cursor:pointer;
+  overflow: hidden;
+  -webkit-animation: action 1s infinite  alternate;
+  animation: action 1s infinite  alternate;
 }
