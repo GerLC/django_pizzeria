@@ -2,14 +2,19 @@
     <div class= "row">
         <div *ngIf="pedidos">
             <strong>Pedido N: {{pedidos.id}}</strong>
-            <div *ngFor="let pizza of pizza">
+            <div>Cantidad de Pizzas: {{cantidad}}</div>
+            <div *ngFor="let pizza of pizza" style="width: 25rem;">
                 <div *ngIf="pizza.id_pedido.id === pedidos.id">
-                    <mat-divider></mat-divider>
-                    Pizza: {{pizza.id_tamano.nombre_tamano}} - {{pizza.id_tamano.monto_tamano}}
+                    <mat-divider style="margin: 1%;"></mat-divider>
+                    <div style="display: flex; justify-content: space-between;">
+                        <div>Pizza: {{pizza.id_tamano.nombre_tamano}}</div>
+                        <div>{{pizza.id_tamano.monto_tamano}}</div>
+                    </div>
                     <p> <strong>Toppins = </strong> </p>
                     <div *ngFor="let toppin of toppinSelected">
-                        <div *ngIf="toppin.id_pizza.id === pizza.id">
-                            {{toppin.id_toppin.nombre_toppin}} - {{toppin.id_toppin.monto_toppin}}
+                        <div *ngIf="toppin.id_pizza.id === pizza.id" style="display: flex; justify-content: space-between;">
+                            <div>{{toppin.id_toppin.nombre_toppin}}</div>
+                            <div>{{toppin.id_toppin.monto_toppin}}</div>
                         </div>
                     </div>
 
@@ -19,11 +24,18 @@
                 <p><strong>Bebidas:</strong></p>
                 <div *ngFor= "let bebida of bebidas">
                     <div *ngIf="bebida.id_pedido.id === pedidos.id">
-                        {{bebida.id_bebida.nombre_bebida}} - {{bebida.id_bebida.monto_bebida}}
+                        <div style="display: flex; justify-content: space-between;">
+                            <div>{{bebida.id_bebida.nombre_bebida}}</div>
+                            <div>{{bebida.id_bebida.monto_bebida}}</div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <p>Total a pagar: {{pedidos.total_pedido}}  </p>
+            <mat-divider></mat-divider>
+            <br>
+            <p style="display: flex; justify-content: flex-end;" >Total a pagar: ${{pedidos.total_pedido}}  </p>
         </div>
+
+        <div (click)="print()"> Imprimir </div>
     </div>
 </div>

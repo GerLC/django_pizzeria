@@ -1,3 +1,15 @@
+@media print {
+   :not(.printMe) {
+     visibility: hidden;
+   }
+ }
+ 
+ @media print {
+   .printMe {
+     visibility: visible
+   }
+ }
+
 .mat-stepper-vertical {
    margin-top: 8px;
 }

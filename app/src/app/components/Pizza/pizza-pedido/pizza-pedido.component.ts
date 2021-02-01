@@ -14,7 +14,7 @@ export class PizzaPedidoComponent implements OnInit {
 
   // Variables
   // Estados
-  isLinear = true;
+  isLinear = false;
   isWait = false;
 
   // Pedido 
@@ -57,11 +57,13 @@ export class PizzaPedidoComponent implements OnInit {
   }
 
   nav(){
+    this.openSnackBar( 'Generando Factura ', 'ok')
     this.router.navigateByUrl('/', { skipLocationChange : true}).then( ( ) => {
       this.router.navigate(['/pizza'], { queryParams: {
         pedido: this.pedido.pedido
       }});
     })
+
   }
 
   
@@ -312,6 +314,7 @@ add(id: number): void {
   createBebida(): void {
     let newToppin: any;
     let idBebida: any; 
+ 
 
     for(let i = 0; i < this.bebida.length; i++) {
   
@@ -330,7 +333,7 @@ add(id: number): void {
         
         newToppin = idBebida.id_bebida.monto_bebida;
         this.monto += parseFloat(newToppin);
-  
+
       } 
       console.log('Monto Final', this.monto);
   

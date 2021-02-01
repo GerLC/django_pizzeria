@@ -17,6 +17,9 @@ export class HomeComponent implements OnInit {
   pedidoFormControl: any;
   // Estado
   isWait: boolean = false;
+  isSelected1: boolean = false;
+  isSelected2: boolean = false;
+
   // Img
   images= [`/assets/images/pizza.jpg`, `/assets/images/pizza2.jpg`, `/assets/images/pizza3.jpg`]
 
@@ -100,10 +103,16 @@ changeName(input: any) {
   if (input == 'Local') {
     this.isLocal = true;
     (document.getElementById("direccion") as HTMLTextAreaElement).value = this.direccion;
+    this.isSelected1 = true; 
+    this.isSelected2 = false; 
+
+
   } else {
     this.isLocal = false;
 
-    (document.getElementById("direccion") as HTMLTextAreaElement).value = ''
+    (document.getElementById("direccion") as HTMLTextAreaElement).value = '';
+    this.isSelected1 = false; 
+    this.isSelected2 = true; 
   }
 }  
 

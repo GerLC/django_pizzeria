@@ -38,12 +38,22 @@
         </div>
         <mat-divider [vertical]=true></mat-divider>
         <div class="col-5">
-            <div class="btn-group">
-                <button value='Local' style="background-image: url(https://picsum.photos/id/1047/450/180); background-repeat: no-repeat;" (click)="changeName('Local')"><mat-icon style="font-size: 3em;">local_pizza</mat-icon></button>
-                <button value='Delivery' style="background-image: url(https://picsum.photos/id/0/450/180); background-repeat: no-repeat;" (click)="changeName('Delivery')"><mat-icon style="font-size: 3em;">house</mat-icon></button>
+            <!-- <div class="btn-group">
+                <button value='Local' style="background-image: url(https://picsum.photos/id/1047/450/180); background-repeat: no-repeat; display: flex;" 
+                (click)="changeName('Local')"><mat-icon style="font-size: 3em;">local_pizza</mat-icon></button>
+                <button value='Delivery' style="background-image: url(https://picsum.photos/id/0/450/180); background-repeat: no-repeat; display: flex;" 
+                (click)="changeName('Delivery')"><mat-icon style="font-size: 3em;">house</mat-icon></button>
+              </div> -->
+              <div class="btn-group" data-toggle="buttons">
+                <button [ngClass]="{'btn-active': isSelected1 === true}" value='Local' style="background-image: url(https://picsum.photos/id/1047/450/180); background-repeat: no-repeat; display: flex;" 
+                (click)="changeName('Local')">
+                    <mat-icon style="font-size: 3em;">local_pizza</mat-icon>
+                </button>
+                <button [ngClass]="{'btn-active': isSelected2 === true}" value='Delivery' style="background-image: url(https://picsum.photos/id/0/450/180); background-repeat: no-repeat; display: flex;" 
+                (click)="changeName('Delivery')">
+                    <mat-icon style="font-size: 3em;">house</mat-icon>
+                </button>
               </div>
-
-
         </div>
     </div>
 </div>

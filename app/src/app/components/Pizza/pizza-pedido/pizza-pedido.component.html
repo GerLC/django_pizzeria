@@ -57,6 +57,7 @@
                     <mat-card> 
                       <div *ngFor= "let toppin of toppinSelected">
                         <div *ngIf="toppin.id_pizza.id === pizza.id">
+                          <mat-divider></mat-divider>
                           {{toppin.id_toppin.nombre_toppin}}  -  ${{toppin.id_toppin.monto_toppin}}
                         </div>
                       </div>
@@ -67,7 +68,7 @@
              <div>
                 <button mat-button matStepperPrevious>Back</button>
                 <button mat-button (click)="stepper.reset()">Solicitar Otra Pizza</button>
-                <button mat-button matStepperNext>Next</button>
+                <button mat-button matStepperNext>Bebidas?</button>
                 <button mat-button (click)="nav()"> Generar Factura </button>
 
               </div>
@@ -107,23 +108,28 @@
             </mat-step>
           </mat-vertical-stepper>  
 
+          <mat-card> 
+              <div *ngIf="pedidos">
+                Total Actual: ${{pedidos.total_pedido}}
+              </div>
+          </mat-card>
+
 
         </div>        
   
   
-      <div class="col-3" style="border: 1px solid #000; border-radius: 5%;">
-         <div *ngIf= "pedidos">
-            <h4><strong>Factura Datos:</strong></h4>
+      <div class="col-5 printMe" style="border: 1px solid #000; border-radius: 1%;">
+         <div *ngIf= "pedidos" class="printMe">
+            <h4 class="printMe"><strong class="printMe">Factura Datos:</strong></h4>
             <hr>
-            Codigo: {{pedidos.id}}
+            Codigo: {{pedidos.id}}   
             Usuario: {{pedidos.usuario}}
-            <p>Estatus: {{pedidos.estatus}} </p>
-            <p>Metodo Pedido: {{pedidos.metodo_pedido}} </p>
-            <p>Direccion: {{pedidos.direccion_pedido}} </p>
+            <p class="printMe">Estatus: {{pedidos.estatus}} </p>
+            <p class="printMe">Metodo Pedido: {{pedidos.metodo_pedido}} </p>
+            <p class="printMe">Direccion: {{pedidos.direccion_pedido}} </p>
 
-            Total Actual: {{pedidos.total_pedido}}
          </div>
-         <app-orden [pedido]="pedido.pedido"></app-orden>
+         <app-orden class="printMe" [pedido]="pedido.pedido"></app-orden>
       </div>
     </div>
 
