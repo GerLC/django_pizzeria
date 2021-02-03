@@ -17,6 +17,19 @@
             <mat-step [stepControl]="toppinFormControl" [optional]="true">
               <form [formGroup]="toppinFormControl">
                 <ng-template matStepLabel>TOPPINS</ng-template>
+
+                <h5 style="margin-bottom: 5px;" ><strong>Toppins disponibles:</strong></h5>
+                <div style="margin-bottom: 5px;" class="flexing">
+                  <div class="container-img"  *ngFor="let tipo of toppins">
+                    <button mat-stroked-button color="warn">{{tipo.nombre_toppin}} ${{ tipo.monto_toppin}}</button>
+                    <div class="overlay">
+                      <img src="{{tipo.imagen_toppin}}" alt="image" height="100px" />
+                    </div>
+                  </div>  
+                </div>
+                <mat-divider></mat-divider>
+                <h5 style="margin: 3px;" ><strong>Agregue Toppins</strong></h5>
+
                 <button  matTooltip="Agregue Toppin" mat-icon-button color="primary" aria-label="Agregue Toppins" (click)="addToppin()">
                     <mat-icon>add_shopping_cart</mat-icon>
                   </button>
@@ -76,9 +89,25 @@
             <mat-step [stepControl]="bebidaFormControl" [optional]="true">
               <form [formGroup]="bebidaFormControl">
                 <ng-template matStepLabel>Bebidas</ng-template>
+
+                <h5 style="margin-bottom: 5px;"><strong>Bebidas Disponibles :</strong></h5>
+        
+                <div style="margin-bottom: 5px;" class="flexing">
+                  <div class="container-img"  *ngFor="let tipo of bebidas">
+                    <button mat-stroked-button color="warn">{{tipo.nombre_bebida}} ${{ tipo.monto_bebida}}</button>
+                    <div class="overlay">
+                      <img src="{{tipo.imagen_bebida}}" alt="image" height="100px" />
+                    </div>
+                  </div>  
+                </div>
+
+                <mat-divider></mat-divider>
+                <h5 style="margin: 3px;" ><strong>Agregue Bebidas</strong></h5>
+
+
                 <button matTooltip="Agregar Bebidas" mat-icon-button color="primary" aria-label="Agregue bebidas" (click)="addBebida()">
                     <mat-icon>add_shopping_cart</mat-icon>
-                  </button>
+                </button>
 
                   <div formArrayName="bebida">
                     <div *ngFor="let t of bebidaFormControl.get('bebida').controls; let i=index">
@@ -86,11 +115,11 @@
                         <mat-form-field appearance="standard" style="margin: 3%;">
                           <mat-label>Bebidas</mat-label>
                           <mat-select formControlName="id_bebida">
-                          <mat-option
-                              *ngFor="let tipo of bebidas"
-                              [value]="tipo">
-                              {{ tipo.nombre_bebida }}  - ${{ tipo.monto_bebida}}
-                          </mat-option>
+                            <mat-option
+                                *ngFor="let tipo of bebidas"
+                                [value]="tipo">
+                                {{ tipo.nombre_bebida }}  - ${{ tipo.monto_bebida}}
+                            </mat-option>
                           </mat-select>
                           <mat-icon matSuffix>local_pizza</mat-icon>
                          </mat-form-field>
@@ -99,7 +128,9 @@
                           </button>
                       </div>
                     </div>
-                  </div>              
+                  </div>  
+                  
+                  
                 <div>
                   <button mat-button matStepperPrevious>Back</button>
                   <button mat-raised-button (click) ='createBebida()' matStepperPrevious> Pedir Bebidas</button>
@@ -123,7 +154,7 @@
             <h4 class="printMe">
               <strong class="printMe">Factura Datos:</strong>
               <div class="printMe icon">
-                <img src="\assets\images\Pizza-icon_30282.png" alt="Random first slide">
+                <img class="printMe" src="\assets\images\Pizza-icon_30282.png" alt="Random first slide">
               </div>
             </h4>
             <hr>

@@ -15,6 +15,7 @@ class TamanoPizza(models.Model):
 class Toppin(models.Model):
     nombre_toppin = models.CharField(max_length=50, unique=True)
     monto_toppin = models.DecimalField(max_digits=18, decimal_places=2)
+    imagen_toppin = models.CharField(max_length=200)
 
     def __str__(self):
         return self.nombre_toppin
@@ -23,6 +24,7 @@ class Toppin(models.Model):
 class Bebida(models.Model):
     nombre_bebida = models.CharField(max_length=50, unique=True)
     monto_bebida = models.DecimalField(max_digits=18, decimal_places=2)
+    imagen_bebida = models.CharField(max_length=200)
 
     def __str__(self):
         return self.nombre_bebida
