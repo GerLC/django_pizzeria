@@ -41,6 +41,9 @@ class Pizza(models.Model):
     id_pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE)
     id_tamano = models.ForeignKey(TamanoPizza, on_delete=models.DO_NOTHING)
 
+    def __str__(self):
+        return self.id_tamano.nombre_tamano
+
 
 class PizzaToppin(models.Model):
     id_pizza = models.ForeignKey(Pizza, on_delete=models.DO_NOTHING)

@@ -10,6 +10,15 @@
    }
  }
 
+ .icon img {
+   position: absolute;
+   background-size: cover;
+   width: 12rem;
+   left: 12rem;
+   top: 3rem;
+   opacity: 0.2;
+ }
+
 .mat-stepper-vertical {
    margin-top: 8px;
 }

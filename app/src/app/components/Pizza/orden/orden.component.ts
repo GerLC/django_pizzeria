@@ -68,7 +68,7 @@ export class OrdenComponent implements OnInit,  OnChanges {
       this.cantidadData = this.cantidadData.filter(item => item.id_pedido.id == this.pedido );
 
       this.cantidad = this.cantidadData.length;
-      console.log('Factura PizzaTime!', this.pizza)
+      // console.log('Factura PizzaTime!', this.pizza)
     })
   }
 
@@ -78,7 +78,7 @@ export class OrdenComponent implements OnInit,  OnChanges {
     {
       this.toppinSelected = data ;
 
-      console.log('Factura Toppin', this.toppinSelected)
+      // console.log('Factura Toppin', this.toppinSelected)
     })
   }
 
@@ -92,7 +92,7 @@ export class OrdenComponent implements OnInit,  OnChanges {
     this.pizzaService.getOrdenById(this.pedido).subscribe((data) =>
     {
       this.pedidos = data;
-      console.log('Factura PedidoOrden', this.pedidos)
+      // console.log('Factura PedidoOrden', this.pedidos)
     })
   }
 

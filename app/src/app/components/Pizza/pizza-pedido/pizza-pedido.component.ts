@@ -98,6 +98,7 @@ export class PizzaPedidoComponent implements OnInit {
 
     this.pizzaService.updateMonto(this.pedido.pedido,pedidoN).subscribe((response) => {
 
+      console.log ('Monto', response)
       this.getToppinPizza();
       this.getOrderId();
     })
@@ -108,7 +109,7 @@ export class PizzaPedidoComponent implements OnInit {
     this.pizzaService.getTamanoPizza().subscribe((data) =>
     {
       this.tamanoPizza = data;
-      console.log(this.tamanoPizza)
+      // console.log(this.tamanoPizza)
     })
   }
 
@@ -116,7 +117,7 @@ export class PizzaPedidoComponent implements OnInit {
     this.pizzaService.getIngredientes().subscribe((data) =>
     {
       this.toppins = data;
-      console.log(this.toppins)
+      // console.log(this.toppins)
     })
   }
 
@@ -124,7 +125,7 @@ export class PizzaPedidoComponent implements OnInit {
     this.pizzaService.getBebidas().subscribe((data) =>
     {
       this.bebidas = data;
-      console.log(this.bebidas)
+      // console.log(this.bebidas)
     })
   }
 
@@ -132,7 +133,7 @@ export class PizzaPedidoComponent implements OnInit {
     this.pizzaService.getPizza(id).subscribe((data) =>
     {
       this.pizza = data;
-      console.log('PizzaTime!', this.pizza)
+      // console.log('PizzaTime!', this.pizza)
     })
   }
 
@@ -142,7 +143,7 @@ export class PizzaPedidoComponent implements OnInit {
     this.pizzaService.getToppinPizza().subscribe((data) =>
     {
       this.toppinSelected = data;
-      console.log('TOPINSELECTED', this.toppinSelected)
+      // console.log('TOPINSELECTED', this.toppinSelected)
     })
   }
 
@@ -151,7 +152,7 @@ export class PizzaPedidoComponent implements OnInit {
     this.pizzaService.getOrdenById(this.pedido.pedido).subscribe((data) =>
     {
       this.pedidos = data;
-      console.log('PedidoOrden', this.pedidos)
+      // console.log('PedidoOrden', this.pedidos)
     })
   }
 
@@ -183,11 +184,12 @@ export class PizzaPedidoComponent implements OnInit {
     })
   }
 
-  createBebi(bebida:any) {
+  createBebi(bebida:any , montob: any) {
     this.isWait = true;
     this.pizzaService.addBebida(bebida).subscribe((response) => {
       this.isWait = false;
-      this.updateMonto(this.pedidos,this.monto);
+      // console.log('Creando BEBIDA actualizar', this.monto)
+      // this.updateMonto(this.pedidos,this.monto);
       this.openSnackBar('Bebidas Guardadas ', 'Bebidas!');
 
     })
@@ -314,6 +316,7 @@ add(id: number): void {
   createBebida(): void {
     let newToppin: any;
     let idBebida: any; 
+    let montoB: number= 0;
  
 
     for(let i = 0; i < this.bebida.length; i++) {
@@ -324,18 +327,24 @@ add(id: number): void {
         id_pedido: this.pedido.pedido,
         id_bebida: idBebida.id_bebida.id
       };
-  
+
+
       if (this.bebida.length === 0) {
          console.log("Array is empty!")
          } else {
-          this.createBebi(newBebida);
+          this.createBebi(newBebida, montoB);
         }
         
+
         newToppin = idBebida.id_bebida.monto_bebida;
-        this.monto += parseFloat(newToppin);
+        montoB += parseFloat(newToppin);  
+        // this.monto += parseFloat(newToppin);  
 
       } 
-      console.log('Monto Final', this.monto);
+
+      this.updateMonto(this.pedidos,montoB);
+      console.log('MontoBebidaAntes', montoB);
+
   
     }
   
