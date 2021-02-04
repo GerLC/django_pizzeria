@@ -27,15 +27,12 @@ export class PizzaPedidoComponent implements OnInit {
   toppinFormControl: any;
   bebidaFormControl: any;
 
-
   // Pizza
   tamanoPizza: any[] = [];
   bebidas: any[] = [];
   toppins: any[] = [];
 
-
-
-  // Array
+  // VAR AXILIARES
   pizza: any;
   toppinSelected: any[] = [];
 
@@ -66,7 +63,6 @@ export class PizzaPedidoComponent implements OnInit {
 
   }
 
-  
 
   ngOnInit(): void {
     // Obtener el Numero de Pedido
@@ -84,11 +80,12 @@ export class PizzaPedidoComponent implements OnInit {
     this.buildForm();
   }
 
-  // UpdateMonto
+  // UpdateMonto 
+  // Actualiza el monto del pedido 
   updateMonto(pedido: any, monto: any): void {
 
     const pedidoN: any = {
-      estatus_pedido: 'Pedido',
+      estatus_pedido: 'Pedido', 
       fecha_pedido: pedido.fecha_pedido,
       total_pedido: parseFloat(pedido.total_pedido) + parseFloat(monto),
       metodo_pedido: pedido.metodo_pedido,
@@ -104,7 +101,9 @@ export class PizzaPedidoComponent implements OnInit {
     })
   }
 
-  // Obtener objetos
+  // GETs
+
+  // Obtener Tamano de Pizzas Disponibles en la BD
   getTamano(): void {
     this.pizzaService.getTamanoPizza().subscribe((data) =>
     {
@@ -113,6 +112,7 @@ export class PizzaPedidoComponent implements OnInit {
     })
   }
 
+  // Obtener Toppins Disponibles en la BD
   getToppin(): void {
     this.pizzaService.getIngredientes().subscribe((data) =>
     {
@@ -121,6 +121,7 @@ export class PizzaPedidoComponent implements OnInit {
     })
   }
 
+  // Obtener bebidas disponibles en la BD
   getBebida(): void {
     this.pizzaService.getBebidas().subscribe((data) =>
     {
@@ -129,6 +130,8 @@ export class PizzaPedidoComponent implements OnInit {
     })
   }
 
+  // Obtener Pizza disponible en la BD
+  // Utilizados para mostrar la Pizza Pedida
   getPizza(id: number): void {
     this.pizzaService.getPizza(id).subscribe((data) =>
     {
@@ -138,7 +141,8 @@ export class PizzaPedidoComponent implements OnInit {
   }
 
 
-  
+  // Obtener Pizza disponible en la BD
+  // Utilizados para mostrar los Toppins de la  Pizza Pedida
   getToppinPizza(): void {
     this.pizzaService.getToppinPizza().subscribe((data) =>
     {
@@ -147,7 +151,8 @@ export class PizzaPedidoComponent implements OnInit {
     })
   }
 
-
+  // Obtener el Numero de Pedido creado
+  // Este ID es la orden que se asociara todas las Pizzas Bebidas pedidas
   getOrderId(): void {
     this.pizzaService.getOrdenById(this.pedido.pedido).subscribe((data) =>
     {
@@ -197,23 +202,6 @@ export class PizzaPedidoComponent implements OnInit {
 
   // ADD Forms
 
-  //  Crea
-  addPizza(): void {
-
-  this.monto = parseFloat(this.pizzaFormControl.get("id_tamano").value.monto_tamano);
-
-  const newPizza: any = {
-    id_pedido: this.pedido.pedido,
-    id_tamano: this.pizzaFormControl.get("id_tamano").value.id,
-  };
-  console.log(newPizza);
-
-  this.openSnackBar('Pizza ' + this.pizzaFormControl.get("id_tamano").value.nombre_tamano, 'Ok!');
-
-  this.createPizza(newPizza);
-
-}
-
   buildForm(): void {
     this.pizzaFormControl = this.fb.group({
      id_tamano: ["",
@@ -233,6 +221,23 @@ export class PizzaPedidoComponent implements OnInit {
   }
 
   // TOPPIN
+
+  //  Crea
+  addPizza(): void {
+
+    this.monto = parseFloat(this.pizzaFormControl.get("id_tamano").value.monto_tamano);
+  
+    const newPizza: any = {
+      id_pedido: this.pedido.pedido,
+      id_tamano: this.pizzaFormControl.get("id_tamano").value.id,
+    };
+    console.log(newPizza);
+  
+    this.openSnackBar('Pizza ' + this.pizzaFormControl.get("id_tamano").value.nombre_tamano, 'Ok!');
+  
+    this.createPizza(newPizza);
+  
+  }
 
   get toppin() : FormArray {
     return this.toppinFormControl.get("toppin") as FormArray

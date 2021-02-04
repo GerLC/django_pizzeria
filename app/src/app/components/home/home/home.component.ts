@@ -19,12 +19,12 @@ export class HomeComponent implements OnInit {
   isWait: boolean = false;
   isSelected1: boolean = false;
   isSelected2: boolean = false;
+  isLocal = true;
 
   // Img
   images= [`/assets/images/pizza.jpg`, `/assets/images/pizza2.jpg`, `/assets/images/pizza3.jpg`]
-
+  // Direccion Local
   direccion: string = '123 Av. Pizzeria La UCAB'
-  isLocal = true;
 
   constructor(
     private fb: FormBuilder,
@@ -32,6 +32,7 @@ export class HomeComponent implements OnInit {
     private pizzaService: PizzaService,
     public config: NgbCarouselConfig,
   ) {
+    // Carousel
     config.interval = 5000;
     config.keyboard = false;
     config.pauseOnHover = false;
@@ -96,7 +97,7 @@ pedidoPizza(idPedido: number){
 }
 
 
-// INPUT
+// INPUT LOCAL or DELIVERY
 
 changeName(input: any) {
   (document.getElementById("metodo") as HTMLTextAreaElement).value = input;
