@@ -36,6 +36,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -76,9 +78,10 @@ import {MatSort} from '@angular/material/sort';
     MatTooltipModule,
     MatSnackBarModule,
     MatTableModule,
-
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
-  providers: [],
+  providers: [MatDatepickerModule,],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
