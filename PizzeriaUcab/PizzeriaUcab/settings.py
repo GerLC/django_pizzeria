@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'pizzeria.apps.PizzeriaConfig',
+    'nested_admin',
 ]
 
 MIDDLEWARE = [

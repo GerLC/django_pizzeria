@@ -15,6 +15,7 @@ import { HomeComponent } from './components/home/home/home.component';
 import { NavComponent } from './components/Navigation/nav/nav.component';
 import { FootComponent } from './components/Footer/foot/foot.component';
 import { OrdenComponent } from './components/Pizza/orden/orden.component';
+import { ReporteComponent } from './components/reports/reporte/reporte.component';
 
 // Material
 import {MatStepperModule} from '@angular/material/stepper';
@@ -32,6 +33,9 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatCardModule} from '@angular/material/card';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -43,6 +47,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     NavComponent,
     FootComponent,
     OrdenComponent,
+    ReporteComponent,
   ],
   imports: [
     BrowserModule,
@@ -69,7 +74,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatDividerModule,
     MatCardModule,
     MatTooltipModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatTableModule,
 
   ],
   providers: [],

@@ -31,9 +31,9 @@ class TamanoPizzaViewSet(viewsets.ModelViewSet):
     Tabla: TamanoPizza
     Obtiene: Tamano de la Pizza Ex. (Grande,Mediano,Pequeno)
     """
-    pagination_class = None
-    queryset = models.TamanoPizza.objects.all()
-    serializer_class = serializers.TamanoPizzaSerializer
+    pagination_class = None                              #Evita que el JSON devuelva {url, next, previuos}
+    queryset = models.TamanoPizza.objects.all()          #Query para traer todos los objetos
+    serializer_class = serializers.TamanoPizzaSerializer #Transforma los datos del Query en el formato JSON, XML, etc y viceversa
 
 
 class ToppinViewSet(viewsets.ModelViewSet):
